@@ -628,9 +628,9 @@ class ReleaseCrudController extends CrudController
                 'tab' => trans('songs-crud::songscrud.tracks'),
             ]);
             $this->crud->addField([
-                'name' => 'upload_tracks',
+                'name' => 'songs',
                 'label' => trans('songs-crud::songscrud.upload_tracks'),
-                'type' => 'upload_tracks',
+                'type' => 'songs',
                 'disk'             => 'public',
                 'destination_path' => 'products/',
                 'image_width'      => 800,

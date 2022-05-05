@@ -169,6 +169,7 @@ class TrackCrudController extends CrudController
         DB::table('songs_tracks')->updateOrInsert(
             ['hash' => $fileHash],
             [
+                'release_id' => $request->id,
                 'image' => $cover,
                 'name' => $title,
                 'artist' => $artist,
