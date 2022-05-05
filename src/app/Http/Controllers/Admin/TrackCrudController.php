@@ -2,6 +2,7 @@
 
 namespace SequelONE\SongsCRUD\app\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -123,6 +124,9 @@ class TrackCrudController extends CrudController
         $this->setupCreateOperation();
     }
 
+    /**
+     * @throws \getid3_exception
+     */
     public function upload(TrackRequest $request)
     {
         $file = $request->file('file');
@@ -149,7 +153,7 @@ class TrackCrudController extends CrudController
         $album = !empty($t['tags']['id3v2']['album']['0']) ? $t['tags']['id3v2']['album']['0'] : '';
         $year = !empty($t['tags']['id3v2']['year']['0']) ? $t['tags']['id3v2']['year']['0'] : '';
         $genre = !empty($t['tags']['id3v2']['genre']['0']) ? $t['tags']['id3v2']['genre']['0'] : '';
-        $url = Storage::url($tracksPath . $fileHash . '.' . $extension);
+        $url = Storage::url($tracksPath . $fileHash . '.mp3');
 
         if(!empty($track->getArtwork(true))) {
             $tmpCoverFile = $track->getArtwork(true)->getPathname();
@@ -161,6 +165,22 @@ class TrackCrudController extends CrudController
         } else {
             $cover = 'vendor/songs-crud/images/none.png';
         }
+
+        DB::table('songs_tracks')->updateOrInsert(
+            ['hash' => $fileHash],
+            [
+                'image' => $cover,
+                'name' => $title,
+                'artist' => $artist,
+                'band' => $band,
+                'album' => $album,
+                'year' => $year,
+                'genre' => $genre,
+                'url' => $url,
+                'hash' => $fileHash,
+                'slug' => $fileHash
+            ]
+        );
 
         return response()->json([
             'title' => $title,
@@ -183,6 +203,11 @@ class TrackCrudController extends CrudController
         return response()->json([
             'success' => $request->name,
         ]);
+    }
+
+    public function trackListJson() {
+        $tracks = DB::table('songs_tracks')->get();
+        return response()->json($tracks);
     }
 
     /**

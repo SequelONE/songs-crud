@@ -22,8 +22,10 @@ Route::group([
     Route::crud('songs/labels', 'LabelCrudController');
     Route::crud('songs', 'TrackCrudController');
 
-    Route::post('songs/create/track/add', [SequelONE\SongsCRUD\app\Http\Controllers\Admin\TrackController::class, 'upload']);
-    Route::post('songs/create/track/remove', [SequelONE\SongsCRUD\app\Http\Controllers\Admin\TrackController::class, 'delete']);
-    Route::post('songs/{id}/edit/track/add', [SequelONE\SongsCRUD\app\Http\Controllers\Admin\TrackController::class, 'upload']);
-    Route::post('songs/{id}/edit/track/remove', [SequelONE\SongsCRUD\app\Http\Controllers\Admin\TrackController::class, 'delete']);
+    Route::post('songs/releases/create/track/add', [SequelONE\SongsCRUD\app\Http\Controllers\Admin\TrackCrudController::class, 'upload']);
+    Route::post('songs/releases/create/track/remove', [SequelONE\SongsCRUD\app\Http\Controllers\Admin\TrackCrudController::class, 'delete']);
+    Route::post('songs/releases/{id}/edit/track/add', [SequelONE\SongsCRUD\app\Http\Controllers\Admin\TrackCrudController::class, 'upload']);
+    Route::post('songs/releases/{id}/edit/track/remove', [SequelONE\SongsCRUD\app\Http\Controllers\Admin\TrackCrudController::class, 'delete']);
+
+    Route::get('songs/releases/json', [SequelONE\SongsCRUD\app\Http\Controllers\Admin\TrackCrudController::class, 'trackListJson']);
 });

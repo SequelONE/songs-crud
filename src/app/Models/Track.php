@@ -20,18 +20,25 @@ class Track extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'songs';
+    protected $table = 'songs_tracks';
     protected $primaryKey = 'id';
     public $timestamps = true;
     // protected $guarded = ['id'];
     protected $fillable = [
+        'image',
         'name',
         'artist',
-        'feat',
-        'slug'
+        'band',
+        'album',
+        'year',
+        'genre',
+        'url',
+        'hash',
+        'slug',
+        'shortlink'
     ];
 
-    protected $translatable = ['name', 'slug'];
+    protected $translatable = ['name'];
 
     // protected $hidden = [];
     // protected $dates = [];

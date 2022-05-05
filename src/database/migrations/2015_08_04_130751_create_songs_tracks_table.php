@@ -14,11 +14,18 @@ class CreateSongsTracksTable extends Migration
     {
         Schema::create('songs_tracks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('song_id')->default(0)->nullable();
-            $table->string('name');
-            $table->string('artist');
-            $table->string('feat');
-			$table->string('slug')->unique();
+            $table->integer('release_id')->default(0)->nullable();
+            $table->text('image')->nullable();
+            $table->string('name')->nullable();
+            $table->string('artist')->nullable();
+            $table->string('band')->nullable();
+            $table->string('album')->nullable();
+            $table->string('year')->nullable();
+            $table->string('genre')->nullable();
+            $table->string('url')->nullable();
+            $table->string('hash')->nullable();
+            $table->string('shortlink')->unique()->nullable();
+			$table->string('slug')->unique()->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
