@@ -106,6 +106,7 @@ class ArtistCrudController extends CrudController
             'name' => 'shortlink',
             'label' => trans('songs-crud::songscrud.shortlink'),
             'type' => 'shortlink',
+            'default'    => $this->getGenerateShortlink(),
             'generate' => 'small',
             'length' => 4,
             'tab' => trans('songs-crud::songscrud.general'),
@@ -132,6 +133,31 @@ class ArtistCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function getGenerateShortlink() {
+
+        $fields = $this->crud->getFields();
+        $generate = 'small'; //$fields['shortlink']['generate'];
+        $length = 4; //$fields['shortlink']['length'];
+
+        $generator = [
+            'global' => '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+            'numeric' => '0123456789',
+            'small' => 'abcdefghijklmnopqrstuvwxyz',
+            'small_alphanumeric' => '0123456789abcdefghijklmnopqrstuvwxyz',
+            'big' => 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+            'big_alphanumeric' => '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+            'special' => '!@#$%^&*()',
+        ];
+
+        if(array_key_exists($generate, $generator))
+        {
+            $chars = $generator[$generate];
+            return substr(str_shuffle($chars), 0, $length);
+        }
+
+        return false;
     }
 
     /**

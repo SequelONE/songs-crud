@@ -12,7 +12,7 @@
                     <img src="{{ config('filesystems.disks.'.$field['disk'].'.url') .'/'. $field['destination_path'] .'/'. $crud->entry->id .'/'. $field['thumb_prefix'] . basename ($file_path) }}" class="img-thumbnail" />
                 </div>
                 <a class="dz-remove dz-remove-existing" href="javascript:undefined;" data-path="{{ basename ($file_path) }}">
-                    {{ trans('songs-crud::songscrud.remove_file') }}
+                    {{ trans('releases-crud::releasescrud.remove_file') }}
                 </a>
             </div>
         @endforeach
@@ -890,16 +890,16 @@
                 headers: {
                     'X-CSRF-Token': '{{ csrf_token() }}'
                 },
-                dictDefaultMessage: "{{ trans('songs-crud::songscrud.drop_to_upload') }}",
-                dictFallbackMessage: "{{ trans('songs-crud::songscrud.not_supported') }}",
+                dictDefaultMessage: "{{ trans('releases-crud::releasescrud.drop_to_upload') }}",
+                dictFallbackMessage: "{{ trans('releases-crud::releasescrud.not_supported') }}",
                 dictFallbackText: null,
-                dictInvalidFileType: "{{ trans('songs-crud::songscrud.invalid_file_type') }}",
-                dictFileTooBig: "{{ trans('songs-crud::songscrud.file_too_big') }}",
-                dictResponseError: "{{ trans('songs-crud::songscrud.response_error') }}",
-                dictMaxFilesExceeded: "{{ trans('songs-crud::songscrud.max_files_exceeded') }}",
-                dictCancelUpload: "{{ trans('songs-crud::songscrud.cancel_upload') }}",
-                dictCancelUploadConfirmation: "{{ trans('songs-crud::songscrud.cancel_upload_confirmation') }}",
-                dictRemoveFile: "{{ trans('songs-crud::songscrud.remove_file') }}",
+                dictInvalidFileType: "{{ trans('releases-crud::releasescrud.invalid_file_type') }}",
+                dictFileTooBig: "{{ trans('releases-crud::releasescrud.file_too_big') }}",
+                dictResponseError: "{{ trans('releases-crud::releasescrud.response_error') }}",
+                dictMaxFilesExceeded: "{{ trans('releases-crud::releasescrud.max_files_exceeded') }}",
+                dictCancelUpload: "{{ trans('releases-crud::releasescrud.cancel_upload') }}",
+                dictCancelUploadConfirmation: "{{ trans('releases-crud::releasescrud.cancel_upload_confirmation') }}",
+                dictRemoveFile: "{{ trans('releases-crud::releasescrud.remove_file') }}",
                 success: function (file, response, request) {
                     if (response.success) {
                         $(file.previewElement).find('.dropzone-filename-field').val(response.filename);
