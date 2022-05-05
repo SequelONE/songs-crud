@@ -612,21 +612,6 @@ class ReleaseCrudController extends CrudController
                 'type' => 'checkbox',
                 'tab' => trans('songs-crud::songscrud.general'),
             ]);
-            $this->crud->addField([   // Table
-                'name'            => 'tracks',
-                'label'           => trans('songs-crud::songscrud.tracks'),
-                'type'            => 'table',
-                'entity_singular' => trans('songs-crud::songscrud.table.track'),
-                'columns'         => [
-                    'name'  => trans('songs-crud::songscrud.table.song'),
-                    'artist'  => trans('songs-crud::songscrud.table.artist'),
-                    'feat'  => trans('songs-crud::songscrud.table.feat'),
-                    'time'  => trans('songs-crud::songscrud.table.time'),
-                ],
-                'max' => 50, // maximum rows allowed in the table
-                'min' => 0, // minimum rows allowed in the table
-                'tab' => trans('songs-crud::songscrud.tracks'),
-            ]);
             $this->crud->addField([
                 'name' => 'songs',
                 'label' => trans('songs-crud::songscrud.upload_tracks'),

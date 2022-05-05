@@ -890,16 +890,16 @@
                 headers: {
                     'X-CSRF-Token': '{{ csrf_token() }}'
                 },
-                dictDefaultMessage: "{{ trans('releases-crud::releasescrud.drop_to_upload') }}",
-                dictFallbackMessage: "{{ trans('releases-crud::releasescrud.not_supported') }}",
+                dictDefaultMessage: "{{ trans('songs-crud::songscrud.drop_to_upload') }}",
+                dictFallbackMessage: "{{ trans('songs-crud::songscrud.not_supported') }}",
                 dictFallbackText: null,
-                dictInvalidFileType: "{{ trans('releases-crud::releasescrud.invalid_file_type') }}",
-                dictFileTooBig: "{{ trans('releases-crud::releasescrud.file_too_big') }}",
-                dictResponseError: "{{ trans('releases-crud::releasescrud.response_error') }}",
-                dictMaxFilesExceeded: "{{ trans('releases-crud::releasescrud.max_files_exceeded') }}",
-                dictCancelUpload: "{{ trans('releases-crud::releasescrud.cancel_upload') }}",
-                dictCancelUploadConfirmation: "{{ trans('releases-crud::releasescrud.cancel_upload_confirmation') }}",
-                dictRemoveFile: "{{ trans('releases-crud::releasescrud.remove_file') }}",
+                dictInvalidFileType: "{{ trans('songs-crud::songscrud.invalid_file_type') }}",
+                dictFileTooBig: "{{ trans('songs-crud::songscrud.file_too_big') }}",
+                dictResponseError: "{{ trans('songs-crud::songscrud.response_error') }}",
+                dictMaxFilesExceeded: "{{ trans('songs-crud::songscrud.max_files_exceeded') }}",
+                dictCancelUpload: "{{ trans('songs-crud::songscrud.cancel_upload') }}",
+                dictCancelUploadConfirmation: "{{ trans('songs-crud::songscrud.cancel_upload_confirmation') }}",
+                dictRemoveFile: "{{ trans('songs-crud::songscrud.remove_file') }}",
                 success: function (file, response, request) {
                     if (response.success) {
                         $(file.previewElement).find('.dropzone-filename-field').val(response.filename);
@@ -921,19 +921,7 @@
                     return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
                 },
                 init: function() {
-                    let i = 0;
                     this.on("success", function(file, response) {
-                        let track = JSON.parse(JSON.stringify(response));
-                        let title = track.title;
-                        let artist = track.artist;
-                        let cover = track.cover;
-                        let album = track.album;
-                        let band = track.band;
-                        let genre = track.genre;
-                        let year = track.year;
-                        let url = track.url;
-                        i++;
-
                         $(function () {
                             AudioPlayer = {
                                 //=> Initialize function to call all functions of the class
@@ -950,23 +938,28 @@
                                 //=> Initialize audio player
                                 initAudioPlayer: function () {
                                     let songs = [];
-                                    let song = {
-                                        name: title,
-                                        artist: artist,
-                                        album: album,
-                                        url: url,
-                                        cover_art_url: cover
-                                    };
-                                    let playlist = '<li class="custom-list--item list-group-item"><div class="text-dark custom-card--inline amplitude-song-container amplitude-play-pause" data-amplitude-song-index="' + i + '" data-amplitude-playlist="special"><div class="custom-card--inline-img"><img src="' + cover + '" alt="' + artist + ' - ' + title + '" class="card-img--radius-sm"></div><div class="custom-card--inline-desc"><p class="text-truncate mb-0">' + title + '</p><p class="text-truncate text-muted font-sm">' + artist + '</p></div></div><ul class="custom-card--labels d-flex ml-auto"><li class="dropleft"><button type="button" class="btn btn-air btn-pill btn-default btn-icon-only amplitude-play-pause" data-amplitude-song-index="' + i + '" data-amplitude-playlist="special"><i class="fas fa-play"></i> <i class="fas fa-pause"></i></button></li></ul></li>';
-                                    $(".list-group.list-group-flush").append(playlist);
-                                    songs.push(song);
-                                    Amplitude.init({
-                                        "songs": songs,
-                                        "playlists": {
-                                            "special": {
-                                                songs: songs
+                                    $.get("/admin/songs/releases/json", function(data) {
+                                        data.forEach(function (d, i) {
+                                            console.log(d.name);
+                                            let song = {
+                                                name: d.name,
+                                                artist: d.artist,
+                                                album: d.album,
+                                                url: d.url,
+                                                cover_art_url: d.image
+                                            };
+                                            let playlist = '<li class="custom-list--item list-group-item"><div class="text-dark custom-card--inline amplitude-song-container amplitude-play-pause" data-amplitude-song-index="' + i + '" data-amplitude-playlist="special"><div class="custom-card--inline-img"><img src="' + d.image + '" alt="' + d.artist + ' - ' + d.name + '" class="card-img--radius-sm"></div><div class="custom-card--inline-desc"><p class="text-truncate mb-0">' + d.name + '</p><p class="text-truncate text-muted font-sm">' + d.artist + '</p></div></div><ul class="custom-card--labels d-flex ml-auto"><li class="dropleft"><button type="button" class="btn btn-air btn-pill btn-default btn-icon-only amplitude-play-pause" data-amplitude-song-index="' + i + '" data-amplitude-playlist="special"><i class="fas fa-play"></i> <i class="fas fa-pause"></i></button></li></ul></li>';
+                                            $(".list-group.list-group-flush").append(playlist);
+                                            songs.push(song);
+                                        });
+                                        Amplitude.init({
+                                            "songs": songs,
+                                            "playlists": {
+                                                "special": {
+                                                    songs: songs
+                                                }
                                             }
-                                        }
+                                        });
                                     });
                                 },
 
@@ -1027,14 +1020,13 @@
                 handle: ".dz-preview",
                 draggable: ".dz-preview",
                 scroll: false,
+                dataIdAttr: 'data-id',
             });
 
             $("#playList").on("click", function () {
                 $("body").toggleClass("open-right-sidebar");
                 $(this).toggleClass("active");
             });
-
-
         </script>
     @endpush
 

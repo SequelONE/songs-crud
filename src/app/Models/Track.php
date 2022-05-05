@@ -34,6 +34,7 @@ class Track extends Model
         'genre',
         'url',
         'hash',
+        'sortable',
         'slug',
         'shortlink'
     ];

@@ -24,6 +24,7 @@ class CreateSongsTracksTable extends Migration
             $table->string('genre')->nullable();
             $table->string('url')->nullable();
             $table->string('hash')->nullable();
+            $table->integer('sortable')->default(0)->nullable();
             $table->string('shortlink')->unique()->nullable();
 			$table->string('slug')->unique()->nullable();
             $table->timestamps();

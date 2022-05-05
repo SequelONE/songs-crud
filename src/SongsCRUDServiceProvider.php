@@ -45,6 +45,10 @@ class SongsCRUDServiceProvider extends ServiceProvider
             __DIR__.'/../config/songscrud.php' => base_path('config/songscrud.php'),
         ], 'SongsCRUD-config');
 
+        $this->publishes([
+            __DIR__.'/../public' => base_path('public/vendor/songs-crud'),
+        ], 'SongsCRUD-public');
+
         if ( $this->app->runningInConsole() ) {
             $this->commands([
                 app\Console\Type::class,

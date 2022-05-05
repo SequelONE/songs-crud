@@ -163,7 +163,7 @@ class TrackCrudController extends CrudController
 
             $cover = Storage::url($coverPath . $fileHash . '/' . $cover64Path);
         } else {
-            $cover = 'vendor/songs-crud/images/none.png';
+            $cover = '/vendor/songs-crud/images/none.png';
         }
 
         DB::table('songs_tracks')->updateOrInsert(

@@ -7,20 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-An admin panel for news articles on Laravel 5-9, using [Backpack\CRUD](https://github.com/Laravel-Backpack/crud). Write articles, with categories and tags.
-
-
-> ### Security updates and breaking changes
-> Please **[subscribe to the Backpack Newsletter](http://backpackforlaravel.com/newsletter)** so you can find out about any security updates, breaking changes or major features. We send an email every 1-2 months.
-
-
-
-## Requirements
-
-This package requires both `backpack/crud` but also `backpack/pro` (the paid addon). If you do NOT have access to `backpack/pro` you can [purchase it here](https://backpackforlaravel.com/pricing). Alternatively, you can use the installation method (A), then:
-- remove all PRO features;
-- replace PRO fields with FREE fields;
-
+This package adds sections to the admin panel for creating a music portal. The scope of application is huge. From small labels to distributors.
 
 ## Installation
 
@@ -182,12 +169,6 @@ If you need to modify how this works in a project:
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details.
 
-## Security
-
-If you discover any security related issues, please email tabacitu@backpackforlaravel.com instead of using the issue tracker.
-
-Please **[subscribe to the Backpack Newsletter](http://backpackforlaravel.com/newsletter)** so you can find out about any security updates, breaking changes or major features. We send an email every 1-2 months.
-
 ## Credits
 
 - [Andrej Kopp][link-author]
@@ -196,13 +177,6 @@ Please **[subscribe to the Backpack Newsletter](http://backpackforlaravel.com/ne
 ## License
 
 Backpack is free for non-commercial use and Backpack PRO 69€/project for commercial use. Please see [License File](LICENSE.md) and [backpackforlaravel.com](https://backpackforlaravel.com/#pricing) for more information.
-
-## Hire us
-
-We've spend more than 10.000 hours creating, polishing and maintaining administration panels on Laravel. We've developed e-Commerce, e-Learning, ERPs, social networks, payment gateways and much more. We've worked on admin panels _so much_, that we've created one of the most popular software in its niche - just from making public what was repetitive in our projects.
-
-If you are looking for a developer/team to help you build an admin panel on Laravel, look no further. You'll have a difficult time finding someone with more experience & enthusiasm for this. This is _what we do_. [Contact us - let's see if we can work together](https://backpackforlaravel.com/need-freelancer-or-development-team).
-
 
 [ico-version]: https://img.shields.io/packagist/v/sequelone/SongsCRUD.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-dual-blue?style=flat-square
