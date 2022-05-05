@@ -1,0 +1,55 @@
+{
+    "name": "sequelone/songs-crud",
+    "type": "library",
+    "description": "An admin panel for music, using Backpack\\CRUD on Laravel 5.",
+    "keywords": [
+        "backpack",
+        "SongsCRUD"
+    ],
+    "homepage": "https://github.com/SequelONE/songs-crud",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Andrej Kopp",
+            "email": "admin@sequel.one",
+            "homepage": "https://sequel.one",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "backpack/crud": "^5.0",
+        "cviebrock/eloquent-sluggable": "^9.0||^8.0||^7.0||^6.0||4.8",
+        "spatie/laravel-translatable": "^4.6",
+        "owen-oj/laravel-getid3": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "^9.0||^7.0",
+        "scrutinizer/ocular": "~1.1",
+        "squizlabs/php_codesniffer": "~2.3 || ~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SequelONE\\SongsCRUD\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SequelONE\\SongsCRUD\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit --testdox"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "SequelONE\\SongsCRUD\\SongsCRUDServiceProvider"
+            ]
+        }
+    }
+}
