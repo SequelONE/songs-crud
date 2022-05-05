@@ -42,8 +42,12 @@ class SongsCRUDServiceProvider extends ServiceProvider
         ], 'SongsCRUD-views');
 
         $this->publishes([
+            __DIR__.'/../config/songscrud.php' => base_path('config/songscrud.php'),
+        ], 'SongsCRUD-config');
+
+        /*$this->publishes([
             __DIR__ . '/../public' => base_path('public/vendor/songs-crud'),
-        ], 'SongsCRUD-public');
+        ], 'SongsCRUD-public');*/
     }
 
     /**
@@ -55,6 +59,8 @@ class SongsCRUDServiceProvider extends ServiceProvider
     {
         // register its dependencies
         $this->app->register(\Cviebrock\EloquentSluggable\ServiceProvider::class);
+
+        $this->mergeConfigFrom(__DIR__.'/../config/songscrud.php', 'songscrud');
 
         // setup the routes
         $this->setupRoutes($this->app->router);

@@ -138,8 +138,8 @@ class ArtistCrudController extends CrudController
     public function getGenerateShortlink() {
 
         $fields = $this->crud->getFields();
-        $generate = 'small'; //$fields['shortlink']['generate'];
-        $length = 4; //$fields['shortlink']['length'];
+        $generate = config('songscrud.generator.chars');
+        $length = config('songscrud.generator.length');
 
         $generator = [
             'global' => '0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ',
