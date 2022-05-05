@@ -14,7 +14,7 @@ class CreateSongsSongTypeTable extends Migration
     {
         Schema::create('songs_song_type', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('song_id')->unsigned();
+            $table->integer('release_id')->unsigned();
             $table->integer('type_id')->unsigned();
             $table->nullableTimestamps();
             $table->softDeletes();

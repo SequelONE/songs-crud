@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use SequelONE\SongsCRUD\app\Http\Requests\ArtistRequest;
 use SequelONE\SongsCRUD\app\Http\Requests\TrackRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Owenoj\LaravelGetId3\GetId3;
@@ -15,6 +14,7 @@ class TrackCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CloneOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\BulkCloneOperation;
@@ -77,7 +77,7 @@ class TrackCrudController extends CrudController
 
     protected function setupCreateOperation()
     {
-        $this->crud->setValidation(ArtistRequest::class);
+        $this->crud->setValidation(TrackRequest::class);
 
         $this->crud->addField([
             'name' => 'name',
@@ -106,7 +106,13 @@ class TrackCrudController extends CrudController
             'entity' => 'labels', // the method that defines the relationship in your Model
             'attribute' => 'name', // foreign key attribute that is shown to user
             'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
-            //'inline_create' => ['entity' => 'type'],
+            'inline_create' => [
+                'entity' => 'labels',
+                'force_select' => true, // should the inline-created entry be immediately selected?
+                'modal_class' => 'modal-dialog modal-xl', // use modal-sm, modal-lg to change width
+                'modal_route' => route('songs/labels-inline-create'), // InlineCreate::getInlineCreateModal()
+                'create_route' =>  route('songs/labels-inline-create-save'), // InlineCreate::storeInlineCreate()
+            ],
             'ajax' => true,
             'tab' => trans('songs-crud::songscrud.filters'),
         ]);

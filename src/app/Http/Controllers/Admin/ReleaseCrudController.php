@@ -16,6 +16,7 @@ class ReleaseCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\BulkDeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\FetchOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\InlineCreateOperation;
 
     public function setup()
     {
@@ -46,7 +47,7 @@ class ReleaseCrudController extends CrudController
                 'width'  => '100px',
             ]);
             $this->crud->addColumn([
-                'name' => 'htitle',
+                'name' => 'title',
                 'label' => trans('songs-crud::songscrud.title'),
                 'type' => 'text',
             ]);
@@ -263,7 +264,13 @@ class ReleaseCrudController extends CrudController
                 'name' => 'genre_id',
                 'entity' => 'genre',
                 'attribute' => 'name',
-                //'inline_create' => true,
+                'inline_create' => [
+                    'entity' => 'genres',
+                    'force_select' => true, // should the inline-created entry be immediately selected?
+                    'modal_class' => 'modal-dialog modal-xl', // use modal-sm, modal-lg to change width
+                    'modal_route' => route('songs/genres-inline-create'), // InlineCreate::getInlineCreateModal()
+                    'create_route' =>  route('songs/genres-inline-create-save'), // InlineCreate::storeInlineCreate()
+                ],
                 'ajax' => true,
                 'tab' => trans('songs-crud::songscrud.filters'),
             ]);
@@ -274,7 +281,13 @@ class ReleaseCrudController extends CrudController
                 'entity' => 'artists', // the method that defines the relationship in your Model
                 'attribute' => 'name', // foreign key attribute that is shown to user
                 'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
-                //'inline_create' => ['entity' => 'artist'],
+                /*'inline_create' => [
+                    'entity' => 'artists',
+                    'force_select' => true, // should the inline-created entry be immediately selected?
+                    'modal_class' => 'modal-dialog modal-xl', // use modal-sm, modal-lg to change width
+                    'modal_route' => route('songs/artists-inline-create'), // InlineCreate::getInlineCreateModal()
+                    'create_route' =>  route('songs/artists-inline-create-save'), // InlineCreate::storeInlineCreate()
+                ],*/
                 'ajax' => true,
                 'tab' => trans('songs-crud::songscrud.filters'),
             ]);
@@ -285,7 +298,14 @@ class ReleaseCrudController extends CrudController
                 'entity' => 'types', // the method that defines the relationship in your Model
                 'attribute' => 'name', // foreign key attribute that is shown to user
                 'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
-                //'inline_create' => ['entity' => 'type'],
+                'inline_create' => [
+                    'entity' => 'types',
+                    'force_select' => true, // should the inline-created entry be immediately selected?
+                    'modal_class' => 'modal-dialog modal-xl', // use modal-sm, modal-lg to change width
+                    'add_button_label' => trans('songs-crud::songscrud.add'),
+                    'modal_route' => route('songs/types-inline-create'), // InlineCreate::getInlineCreateModal()
+                    'create_route' =>  route('songs/types-inline-create-save'), // InlineCreate::storeInlineCreate()
+                ],
                 'ajax' => true,
                 'tab' => trans('songs-crud::songscrud.filters'),
             ]);
@@ -296,7 +316,13 @@ class ReleaseCrudController extends CrudController
                 'entity' => 'labels', // the method that defines the relationship in your Model
                 'attribute' => 'name', // foreign key attribute that is shown to user
                 'pivot' => true, // on create&update, do you need to add/delete pivot table entries?
-                //'inline_create' => ['entity' => 'type'],
+                'inline_create' => [
+                    'entity' => 'labels',
+                    'force_select' => true, // should the inline-created entry be immediately selected?
+                    'modal_class' => 'modal-dialog modal-xl', // use modal-sm, modal-lg to change width
+                    'modal_route' => route('songs/labels-inline-create'), // InlineCreate::getInlineCreateModal()
+                    'create_route' =>  route('songs/labels-inline-create-save'), // InlineCreate::storeInlineCreate()
+                ],
                 'ajax' => true,
                 'tab' => trans('songs-crud::songscrud.filters'),
             ]);

@@ -14,7 +14,7 @@ class CreateSongsSongLabelTable extends Migration
     {
         Schema::create('songs_song_label', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('song_id')->unsigned();
+            $table->integer('release_id')->unsigned();
             $table->integer('artist_id')->unsigned();
             $table->integer('label_id')->unsigned();
             $table->nullableTimestamps();

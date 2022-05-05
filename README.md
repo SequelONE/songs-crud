@@ -46,7 +46,7 @@ php artisan vendor:publish --provider="SequelONE\SongsCRUD\SongsCRUDServiceProvi
 php artisan migrate
 ```
 
-4) [optional] Add a menu item for it in resources/views/vendor/backpack/base/inc/sidebar.blade.php or menu.blade.php:
+4) [optional] Add a menu item for it in `resources/views/vendor/backpack/base/inc/sidebar.blade.php` or `menu.blade.php`:
 
 ```html
 <!-- Songs -->
