@@ -29,9 +29,9 @@ class GenreCrudController extends CrudController
         CRUD::addColumn('slug');
         CRUD::addColumn('parent');
         CRUD::addColumn([   // select_multiple: n-n relationship (with pivot table)
-            'label'     => 'releases', // Table column heading
+            'label'     => trans('releases-crud::releasescrud.releases'), // Table column heading
             'type'      => 'relationship_count',
-            'name'      => 'releases', // the method that defines the relationship in your Model
+            'name'      => 'songs', // the method that defines the relationship in your Model
             'wrapper'   => [
                 'href' => function ($crud, $column, $entry, $related_key) {
                     return backpack_url('songs/releases?genre_id='.$entry->getKey());
@@ -65,7 +65,7 @@ class GenreCrudController extends CrudController
         ]);
         CRUD::addField([
             'label' => 'Parent',
-            'type' => 'select',
+            'type' => 'select2_nested',
             'name' => 'parent_id',
             'entity' => 'parent',
             'attribute' => 'name',
@@ -80,6 +80,6 @@ class GenreCrudController extends CrudController
     protected function setupReorderOperation()
     {
         CRUD::set('reorder.label', 'name');
-        CRUD::set('reorder.max_level', 2);
+        CRUD::set('reorder.max_level', 4);
     }
 }

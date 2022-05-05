@@ -139,6 +139,27 @@ Add in `/config/filesystems.php`
             'root'   => storage_path('uploads/tracks/covers'), // that's where your backups are stored by default: storage/uploads
         ],
 ```
+## Console
+
+This command updates the database with the default release formats. You can use this command if you don't want to insert your data into the table.
+
+```phpregexp
+php artisan songscrud:types
+```
+
+Executing this command loads all genres.
+
+```phpregexp
+php artisan songscrud:genres
+```
+
+> WARNING! ACHTUNG! ВНИМАНИЕ!
+
+Executing this command completely clears the `songs_types` and `songs_genres` tables.
+
+```phpregexp
+php artisan songscrud:clear
+```
 
 ## Change log
 

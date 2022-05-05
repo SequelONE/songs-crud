@@ -3,14 +3,16 @@
 namespace SequelONE\SongsCRUD\app\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
-use Cviebrock\EloquentSluggable\Sluggable;
-use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\Sluggable;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\SluggableScopeHelpers;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 
 class Genre extends Model
 {
     use CrudTrait;
     use Sluggable, SluggableScopeHelpers;
+    use HasTranslations;
 
     /*
     |--------------------------------------------------------------------------
@@ -25,6 +27,7 @@ class Genre extends Model
     protected $fillable = ['name', 'slug', 'parent_id'];
     // protected $hidden = [];
     // protected $dates = [];
+    protected $translatable = ['name', 'slug'];
 
     /**
      * Return the sluggable configuration array for this model.
@@ -64,7 +67,7 @@ class Genre extends Model
 
     public function songs()
     {
-        return $this->hasMany('SequelONE\SongsCRUD\app\Models\Song');
+        return $this->hasMany('SequelONE\SongsCRUD\app\Models\Release');
     }
 
     /*
