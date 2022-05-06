@@ -20,7 +20,7 @@ class Track extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'songs_tracks';
+    protected $table = 'songs';
     protected $primaryKey = 'id';
     public $timestamps = true;
     // protected $guarded = ['id'];

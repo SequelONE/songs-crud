@@ -127,12 +127,16 @@ class TrackCrudController extends CrudController
     /**
      * @throws \getid3_exception
      */
-    public function upload(TrackRequest $request)
+    public function upload(Request $request)
     {
+        if (!$request->has('file')) {
+            return response()->json(['message' => 'Missing file'], 422);
+        }
+
         $file = $request->file('file');
 
-        $extension = $file->extension();
-        $fileName = $file->getClientOriginalName();
+        $extension = !is_null($file->extension()) ? $file->extension() : 'mp3';
+        $fileName = !is_null($file->getClientOriginalName()) ? rtrim($file->getClientOriginalName(), '.') : 'Unknown - Unknown.mp3';
         $tracksPath = 'public/tracks/';
         $globalPath = storage_path('app/public/tracks/');
         $globalTrackPath = $globalPath . $fileName;
@@ -142,7 +146,6 @@ class TrackCrudController extends CrudController
         $fileHash = sha1_file($globalTrackPath);
 
         rename($globalTrackPath, $globalPath . $fileHash . '.' . $extension);
-
 
         $track = GetId3::fromDiskAndPath('storage', 'app/public/tracks/' . $fileHash . '.' . $extension);
 
@@ -179,11 +182,22 @@ class TrackCrudController extends CrudController
                 'genre' => $genre,
                 'url' => $url,
                 'hash' => $fileHash,
+                'sortable' => '',
                 'slug' => $fileHash
             ]
         );
 
+        $getTrackId = DB::table('songs_tracks')
+            ->where('hash', $fileHash)
+            ->first();
+
+        $id = !empty($getTrackId->id) ? $getTrackId->id : 1;
+
+        //$tracks = DB::table('songs_tracks')->where('id', $id)->first();
+        //return response()->json($tracks);
+
         return response()->json([
+            'id' => $id,
             'title' => $title,
             'artist' => $artist,
             'cover' => $cover,
@@ -191,6 +205,7 @@ class TrackCrudController extends CrudController
             'album' => $album,
             'year' => $year,
             'genre' => $genre,
+            'hash' => $fileHash,
             'url' => $url
         ]);
     }
@@ -206,9 +221,15 @@ class TrackCrudController extends CrudController
         ]);
     }
 
-    public function trackListJson() {
-        $tracks = DB::table('songs_tracks')->get();
-        return response()->json($tracks);
+    /**
+     * @throws \getid3_exception
+     */
+    public function getTrackListJson(Request $request): \Illuminate\Http\JsonResponse
+    {
+        dd($this->upload());
+
+        $tracks = DB::table('songs_tracks')->where('id', $request->id)->first();
+        return response()->json([$tracks]);
     }
 
     /**

@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSongsTracksTable extends Migration
+class CreateSongsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateSongsTracksTable extends Migration
      */
     public function up()
     {
-        Schema::create('songs_tracks', function (Blueprint $table) {
+        Schema::create('songs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('release_id')->default(0)->nullable();
             $table->text('image')->nullable();
@@ -39,6 +39,6 @@ class CreateSongsTracksTable extends Migration
      */
     public function down()
     {
-        Schema::drop('songs_tracks');
+        Schema::drop('songs');
     }
 }

@@ -617,12 +617,7 @@ class ReleaseCrudController extends CrudController
                 'label' => trans('songs-crud::songscrud.upload_tracks'),
                 'type' => 'songs',
                 'disk'             => 'public',
-                'destination_path' => 'products/',
-                'image_width'      => 800,
-                'image_height'     => 600,
-                'mimes'            => 'image/*',
-                'max_file_size'    => 25, // MB
-                'thumb_prefix'     => '',
+                'destination_path' => 'tracks/',
                 'tab' => trans('songs-crud::songscrud.tracks'),
             ]);
         });

@@ -20,7 +20,7 @@ class Release extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'songs';
+    protected $table = 'songs_releases';
     protected $primaryKey = 'id';
     public $timestamps = true;
     // protected $guarded = ['id'];
