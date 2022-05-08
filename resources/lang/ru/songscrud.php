@@ -42,6 +42,7 @@ return [
     'cancel_upload'              => 'Отменить загрузку',
     'cancel_upload_confirmation' => 'Загрузка прервана',
     'remove_file'                => 'Удалить файл',
+    'dublicate_files'            => 'Дубликаты файлов не могут быть загружены',
 
     // Shortlink
 

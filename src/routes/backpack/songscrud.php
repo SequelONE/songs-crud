@@ -22,10 +22,12 @@ Route::group([
     Route::crud('songs/labels', 'LabelCrudController');
     Route::crud('songs', 'TrackCrudController');
 
-    Route::post('songs/releases/create/track/add', [SequelONE\SongsCRUD\app\Http\Controllers\Admin\TrackCrudController::class, 'upload'])->name('trackCreateAdd');
-    Route::post('songs/releases/create/track/remove', [SequelONE\SongsCRUD\app\Http\Controllers\Admin\TrackCrudController::class, 'delete'])->name('trackCreateDelete');
-    Route::post('songs/releases/{id}/edit/track/add', [SequelONE\SongsCRUD\app\Http\Controllers\Admin\TrackCrudController::class, 'upload'])->name('trackEditAdd');
-    Route::post('songs/releases/{id}/edit/track/remove', [SequelONE\SongsCRUD\app\Http\Controllers\Admin\TrackCrudController::class, 'delete'])->name('trackEditRemove');
+    Route::post('songs/releases/create/track/add', [SequelONE\SongsCRUD\app\Http\Controllers\UploadTrackController::class, 'upload'])->name('trackCreateAdd');
+    Route::post('songs/releases/create/track/remove', [SequelONE\SongsCRUD\app\Http\Controllers\UploadTrackController::class, 'delete'])->name('trackCreateDelete');
+    Route::post('songs/releases/{id}/edit/track/add', [SequelONE\SongsCRUD\app\Http\Controllers\UploadTrackController::class, 'upload'])->name('trackEditAdd');
+    Route::post('songs/releases/{id}/edit/track/remove', [SequelONE\SongsCRUD\app\Http\Controllers\UploadTrackController::class, 'delete'])->name('trackEditRemove');
 
-    Route::get('songs/releases/json', [SequelONE\SongsCRUD\app\Http\Controllers\Admin\TrackCrudController::class, 'getTrackListJson'])->name('trackEditJson');
+    Route::post('songs/releases/json', [SequelONE\SongsCRUD\app\Http\Controllers\UploadTrackController::class, 'getTrack'])->name('trackEditJson');
+    Route::get('songs/releases/json', [SequelONE\SongsCRUD\app\Http\Controllers\UploadTrackController::class, 'getTrack']);
+    Route::get('songs/releases/json/all', [SequelONE\SongsCRUD\app\Http\Controllers\UploadTrackController::class, 'getTracks'])->name('tracksEditJson');
 });
